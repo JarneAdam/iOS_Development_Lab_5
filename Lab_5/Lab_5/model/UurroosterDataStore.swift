@@ -12,27 +12,51 @@ class UurroosterDataStore {
     var uurrooster : [EventModel]
     
     init() {
-        
+        uurrooster = [EventModel]()
     }
     
     private func sort(){
-       
+        uurrooster.sort{ event1, event2 in
+            event1.startDateTime > event2.startDateTime
+        }
     }
     
     func addEvent(event: EventModel ){
-        
+        event.id = UUID().uuidString
+        uurrooster.append(event)
+        sort()
     }
     
     func updateEvent(event: EventModel ){
-        
+        for model in uurrooster {
+            if event.id.elementsEqual(model.id){
+                model.type = event.type
+                model.allDay = event.allDay
+                model.endDateTime = event.endDateTime
+                model.location = event.location
+                model.startDateTime = event.startDateTime
+                model.title = event.title
+            }
+        }
+        sort()
     }
     
     func deleteEvent(id: String) {
-       
+        //geeft een gefilterde lijst terug zonder het opgegeven element en stopt deze terug in uurrooster
+        uurrooster = uurrooster.filter({ event in
+            return !event.id.elementsEqual(id)
+        })
     }
     
     func getEvent(id: String) -> EventModel {
-        
+        let filtered = uurrooster.filter({ event in
+            return event.id.elementsEqual(id)
+        })
+        if filtered.count  > 0 {
+            return filtered[0]
+        } else {
+            return EventModel()
+        }
     }
     
     func loadData() async {
@@ -41,7 +65,9 @@ class UurroosterDataStore {
             print("⏳ Simulating 2-second load delay...")
             try await Task.sleep(for: .seconds(2)) // Simulate long load
             let data: [EventModelJson] = try load("uurrooster.json")
-            //Hier komt mapping naar array van EventModel -> uurrooster
+            uurrooster = data.map({ evenModelJson in
+                evenModelJson.toEventModel()
+            })
             sort()
             print("✅ Data loaded successfully.")
             
