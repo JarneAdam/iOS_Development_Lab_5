@@ -60,7 +60,6 @@ class UurroosterDataStore {
     }
     
     func loadData() async {
-        //simulate async call
         do {
             print("⏳ Simulating 2-second load delay...")
             try await Task.sleep(for: .seconds(2)) // Simulate long load
