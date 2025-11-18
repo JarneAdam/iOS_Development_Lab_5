@@ -45,7 +45,22 @@ struct UurroosterDetailView: View {
                     }
                 }
                 Divider()
+                HStack {
+                    event.type == 0
+                    ? Image(systemName: "a.circle")
+                    : Image(systemName: "c.circle")
+                }.padding(.top, 10)
+            }.padding(.leading, 20).padding(.trailing, 20)
+            Spacer()
+        }
+        .navigationTitle("Uurrooster detail")
+        .toolbar {
+            NavigationLink {
+                AddModifyEventView(isNew: false, event: EventModel(from: event))
+            } label: {
+                Text("...")
             }
+            
         }
     }
 }

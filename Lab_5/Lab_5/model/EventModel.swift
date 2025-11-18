@@ -26,11 +26,11 @@ class EventModel: Identifiable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         /*hasher.combine(allDay)
-        hasher.combine(title)
-        hasher.combine(location)
-        hasher.combine(type)
-        hasher.combine(startDateTime)
-        hasher.combine(endDateTime)*/
+         hasher.combine(title)
+         hasher.combine(location)
+         hasher.combine(type)
+         hasher.combine(startDateTime)
+         hasher.combine(endDateTime)*/
     }
     
     init() {

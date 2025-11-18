@@ -11,13 +11,13 @@ struct UurroosterList: View {
     @Environment(UurroosterDataStore.self) private var uurroosterDataStore
     @State private var selectedEvent: EventModel?
     @State var loading = true
-        
+    
     var body: some View {
         NavigationSplitView{
             if loading {
                 ProgressView("Loading...")
-                .progressViewStyle(CircularProgressViewStyle())
-                .padding()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .padding()
             } else {
                 List(uurroosterDataStore.uurrooster, id:\.self,  selection: $selectedEvent) { event in
                     VStack {

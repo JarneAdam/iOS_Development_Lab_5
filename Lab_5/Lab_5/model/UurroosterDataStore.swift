@@ -75,7 +75,7 @@ class UurroosterDataStore {
             uurrooster = [EventModel]()
         }
     }
-
+    
 }
 
 private struct EventModelJson: Hashable, Codable, Identifiable {

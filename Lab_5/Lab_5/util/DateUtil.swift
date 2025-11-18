@@ -24,5 +24,5 @@ struct DateUtil {
         let date = formatter.date(from: string)
         return date ?? Date()
     }
-
+    
 }
